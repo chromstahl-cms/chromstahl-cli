@@ -17,13 +17,13 @@ then
     NAME=$(cat meta.json | jq -r ".name")
 
     if [ -d backend ]; then
-        cd backend/ && ./gradlew build && mv build/libs/*.jar ../plugin.jar && cd ../
+        cd backend/ && ./gradlew build && cd ../ && mv backend/build/libs/*.jar plugin.jar
     else
         echo "no backend present, skipping";
     fi
 
     if [ -d frontend ]; then
-        cd frontend/ && npm install && npm run build && npm pack && mv *.tgz ../frontend.tgz && cd ../
+        cd frontend/ && npm install && npm run build && npm pack && cd ../ && mv frontend/*.tgz frontend.tgz
     else
         echo "no frontend present, skipping";
     fi
